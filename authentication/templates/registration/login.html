@@ -2,23 +2,28 @@
 {% load static %}
 {% block css_files %}
 <link rel="stylesheet" href="{% static "utilities/forms.css" %}">
-<link rel="stylesheet" href="{% static "registration/sign_up.css" %}">
+<link rel="stylesheet" href="{% static "registration/login.css" %}">
 {% endblock css_files %}
 {% block content %}
 <div class="form-container">
-    <h1>Sign Up</h1>
+    <h1>Log In</h1>
     <form method="POST">
         {% csrf_token %}
         {% for item in form %}
-            {{item}}
+            <input type="{{ item.field.widget.input_type }}"
+            name="{{ item.name }}"
+            id="{{item.auto_id}}"
+            value="{{ item.value|default:'' }}"
+            {% if item.field.required %}required{% endif %}
+            placeholder="{{item.label}}">
             <label class="label" for="{{item.auto_id}}">
                 {{item.label}}
             </label>
             {{item.errors}}
         {% endfor %}
-        <button type="submit">Sign Up</button>
+        <button type="submit">Log In</button>
     </form>
     <a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'sign_up' %}">Sign Up</a>
 </div>
 {% endblock content %}

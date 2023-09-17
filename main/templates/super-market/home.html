@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +9,11 @@
 </head>
 <body>
     <h1>This is Home page</h1>
-    <a href="{% url 'sign_up' %}">signup</a>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'sign_up' %}">Sign Up</a>
+    <a href="/logout/">Logout</a>
+
+    <h2>{{user.is_authenticated}}</h2>
+    <h3>{{user.username}}</h3>
 </body>
 </html>
